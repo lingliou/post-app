@@ -15,9 +15,7 @@ const ThemeToggleButton = () => {
                 display: "flex",
                 width: "100%",
                 alignItems: "center",
-                justifyContent: "center",
-                bgcolor: "background.default",
-                color: "text.primary",
+                justifyContent: "right",
                 borderRadius: 1,
                 p: 3,
             }}

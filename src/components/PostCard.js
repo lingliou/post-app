@@ -5,23 +5,27 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
-export default function PostCard() {
+export default function PostCard({ title, body }) {
     return (
         <Card
             sx={{
                 display: "flex",
                 flexDirection: { xs: "column", md: "row" },
                 alignItems: "center",
+                margin: 1,
+                boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+                transition: "0.3s",
+                "&:hover": {
+                    boxShadow: "0 8px 16px rgba(0, 0, 0, 0.4)",
+                },
             }}
         >
             <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
-                    Lizard
+                    {title.length > 30 ? `${title.slice(0, 30)}...` : title}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                    Lizards are a widespread group of squamate reptiles, with
-                    over 6,000 species, ranging across all continents except
-                    Antarctica
+                    {body.length > 100 ? `${body.slice(0, 100)}...` : title}
                 </Typography>
             </CardContent>
             <CardActions>
