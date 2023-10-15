@@ -6,6 +6,7 @@ import Footer from "../components/Footer";
 export default function Layout({ children }) {
     return (
         <Container
+            // style={{ overflowX: "hidden" }}
             sx={{
                 minHeight: "100vh",
                 display: "flex",

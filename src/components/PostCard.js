@@ -4,13 +4,15 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import { Link } from "react-router-dom";
 
-export default function PostCard({ title, body }) {
+export default function PostCard({ title, body, id }) {
     return (
         <Card
             sx={{
                 display: "flex",
                 flexDirection: { xs: "column", md: "row" },
+                height: "100%",
                 alignItems: "center",
                 margin: 1,
                 boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
@@ -21,7 +23,13 @@ export default function PostCard({ title, body }) {
             }}
         >
             <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
+                <Typography
+                    gutterBottom
+                    variant="h2"
+                    component="div"
+                    fontSize={"18px"}
+                    fontWeight={"700"}
+                >
                     {title.length > 30 ? `${title.slice(0, 30)}...` : title}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
@@ -29,7 +37,14 @@ export default function PostCard({ title, body }) {
                 </Typography>
             </CardContent>
             <CardActions>
-                <Button size="small">Read More</Button>
+                <Button
+                    size="small"
+                    component={Link}
+                    to={`/posts/${id}`}
+                    state={{ title, body }} // Pass the post data as state
+                >
+                    Read More
+                </Button>
             </CardActions>
         </Card>
     );

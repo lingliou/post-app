@@ -20,9 +20,9 @@ const ThemeToggleButton = () => {
                 p: 3,
             }}
         >
-            {currentTheme.palette.type} mode
+            {currentTheme.palette.mode} mode
             <IconButton sx={{ ml: 1 }} onClick={toggleTheme} color="inherit">
-                {currentTheme.palette.type === "dark" ? (
+                {currentTheme.palette.mode === "dark" ? (
                     <Brightness7Icon />
                 ) : (
                     <Brightness4Icon />

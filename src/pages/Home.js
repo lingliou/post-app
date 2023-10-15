@@ -43,7 +43,7 @@ export default function Home() {
             {/* <Typography variant="h2" sx={{ fontSize: "2rem", m: "10px 0" }}>
                 View Posts
             </Typography> */}
-            <Grid container sx={{ m: 2 }}>
+            <Grid container spacing={2} sx={{ mt: 1, mb: 3 }}>
                 {isLoading
                     ? new Array(pageSize).fill("").map((e, idx) => (
                           <Grid item xs={12} sm={6} key={idx}>
@@ -55,12 +55,13 @@ export default function Home() {
                               />
                           </Grid>
                       ))
-                    : currentPosts.map((post) => (
+                    : currentPosts.map((post, idx) => (
                           <Grid item xs={12} sm={6} key={post.id}>
                               <PostCard
                                   key={post.id}
                                   title={post.title}
                                   body={post.body}
+                                  id={post.id}
                               />
                           </Grid>
                       ))}

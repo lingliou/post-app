@@ -7,7 +7,6 @@ const lightTheme = createTheme({
             main: "#2196F3",
         },
         mode: "light",
-        type: "light", // Set the theme type to light
     },
 });
 
