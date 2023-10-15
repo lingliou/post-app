@@ -16,7 +16,13 @@ export default function Layout({ children }) {
             }}
         >
             <Header />
-            <Container className="main" sx={{ flex: 1, overflowY: "auto" }}>
+            <Container
+                className="main"
+                sx={{
+                    flex: 1,
+                    overflowY: "auto",
+                }}
+            >
                 {children}
             </Container>
             <Footer />

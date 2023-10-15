@@ -17,7 +17,7 @@ const ThemeToggleButton = () => {
                 alignItems: "center",
                 justifyContent: "right",
                 borderRadius: 1,
-                p: 3,
+                p: 2,
             }}
         >
             {currentTheme.palette.mode} mode

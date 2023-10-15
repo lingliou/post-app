@@ -22,7 +22,7 @@ function Header() {
                     alignItems: "center",
                 }}
             >
-                <Typography variant="h1" sx={{ fontSize: "2rem", p: 3 }}>
+                <Typography variant="p" sx={{ fontSize: "1.5rem", px: 4 }}>
                     Post app
                 </Typography>
                 <ThemeToggleButton />

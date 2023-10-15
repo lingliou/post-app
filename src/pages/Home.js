@@ -15,7 +15,7 @@ export default function Home() {
     const [currentPage, setCurrentPage] = useState(1);
     const [isLoading, setIsLoading] = useState(true);
 
-    const pageSize = 10; // Adjust as needed
+    const pageSize = 8; // Adjust as needed
 
     useEffect(() => {
         fetchPosts()
