@@ -48,7 +48,15 @@ export default function PostCard({ title, body, id }) {
                 >
                     {title.length > 30 ? `${title.slice(0, 30)}...` : title}
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
+                <Typography
+                    variant="body2"
+                    sx={{
+                        color: "inherit",
+                        fontWeight: "400",
+                        fontSize: "16px",
+                        my: 1,
+                    }}
+                >
                     {body.length > 100 ? `${body.slice(0, 100)}...` : title}
                 </Typography>
                 <Box
