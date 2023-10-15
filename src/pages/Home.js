@@ -6,6 +6,7 @@ import PostCard from "../components/PostCard";
 import { fetchPosts } from "../api/posts";
 import { useState, useEffect } from "react";
 import { Grid, Skeleton } from "@mui/material";
+import Layout from "./Layout";
 
 export default function Home() {
     const [rawPosts, setRawPosts] = useState([]);
@@ -37,14 +38,15 @@ export default function Home() {
     }, [currentPage, rawPosts]);
 
     return (
-        <Container className="main" sx={{ flex: 1, overflowY: "auto" }}>
+        <Layout>
+            {/* <Container className="main" sx={{ flex: 1, overflowY: "auto" }}> */}
             {/* <Typography variant="h2" sx={{ fontSize: "2rem", m: "10px 0" }}>
                 View Posts
             </Typography> */}
             <Grid container sx={{ m: 2 }}>
                 {isLoading
-                    ? new Array(pageSize).fill("").map((e) => (
-                          <Grid item xs={12} sm={6}>
+                    ? new Array(pageSize).fill("").map((e, idx) => (
+                          <Grid item xs={12} sm={6} key={idx}>
                               <Skeleton
                                   variant="rounded"
                                   //   width="50%vw"
@@ -83,6 +85,7 @@ export default function Home() {
                     }}
                 />
             </Box>
-        </Container>
+            {/* </Container> */}
+        </Layout>
     );
 }
