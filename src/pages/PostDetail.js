@@ -71,7 +71,7 @@ export default function PostDetail() {
                         {!isLoading && (
                             <Paper square={false} elevation={3}>
                                 {comments.map((comment, idx) => (
-                                    <React.Fragment>
+                                    <React.Fragment key={comment.id}>
                                         {idx !== 0 && (
                                             <Divider>
                                                 <Chip label="What Others Said" />

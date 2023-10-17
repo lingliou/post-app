@@ -6,6 +6,15 @@ import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
 import { Avatar, Box } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import {
+    deepOrange,
+    deepPurple,
+    pink,
+    green,
+    amber,
+    blue,
+    grey,
+} from "@mui/material/colors";
 
 const CardContentNoPadding = styled(CardContent)(`
   &:last-child {
@@ -13,7 +22,19 @@ const CardContentNoPadding = styled(CardContent)(`
   }
 `);
 
+const colorArry = [
+    deepOrange[500],
+    deepPurple[500],
+    pink[500],
+    green[500],
+    amber[500],
+    blue[500],
+    grey[500],
+];
+
 export default function CommentCard({ name, body, email }) {
+    let randomColor = colorArry[Math.ceil(Math.random() * colorArry.length)];
+
     // return (
     //     <Card
     //         sx={{
@@ -85,8 +106,16 @@ export default function CommentCard({ name, body, email }) {
             >
                 <Avatar
                     src="/broken-image.jpg"
-                    sx={{ width: 24, height: 24, my: 1 }}
-                />
+                    sx={{
+                        width: 24,
+                        height: 24,
+                        my: 1,
+                        bgcolor: randomColor,
+                    }}
+                >
+                    {email.charAt(0).toUpperCase()}
+                </Avatar>
+
                 {/* <Typography>{name}</Typography> */}
                 <Typography sx={{ mx: 1 }}>{email}</Typography>
             </Box>
