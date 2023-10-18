@@ -20,12 +20,25 @@ const ThemeToggleProvider = ({ children }) => {
     const darkModeStartHour = 19; // 7:00 PM
     const darkModeEndHour = 7; // 7:00 AM (next day)
     useEffect(() => {
-        const currentHour = new Date().getHours();
-        const isNightTime =
-            currentHour >= darkModeStartHour || currentHour < darkModeEndHour;
+        const updateTheme = () => {
+            const currentHour = new Date().getHours();
+            const isNightTime =
+                currentHour >= darkModeStartHour ||
+                currentHour < darkModeEndHour;
 
-        // Set the theme based on the time of day
-        setCurrentTheme(isNightTime ? darkTheme : lightTheme);
+            // Set the theme based on the time of day
+            setCurrentTheme(isNightTime ? darkTheme : lightTheme);
+        };
+
+        updateTheme();
+
+        // Update the theme every minute (adjust the interval as needed)
+        const intervalId = setInterval(updateTheme, 60e3); // 60,000 milliseconds (1 minute)
+
+        return () => {
+            // Clear the interval when the component unmounts
+            clearInterval(intervalId);
+        };
     }, []);
 
     return (
