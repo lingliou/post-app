@@ -17,9 +17,16 @@ const ThemeToggleProvider = ({ children }) => {
         );
     };
 
+    const darkModeStartHour = 19; // 7:00 PM
+    const darkModeEndHour = 7; // 7:00 AM (next day)
     useEffect(() => {
-        // You can save the current theme preference in local storage or a cookie for persistence.
-    }, [currentTheme]);
+        const currentHour = new Date().getHours();
+        const isNightTime =
+            currentHour >= darkModeStartHour || currentHour < darkModeEndHour;
+
+        // Set the theme based on the time of day
+        setCurrentTheme(isNightTime ? darkTheme : lightTheme);
+    }, []);
 
     return (
         <ThemeToggleContext.Provider value={{ currentTheme, toggleTheme }}>
