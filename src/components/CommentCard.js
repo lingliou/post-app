@@ -1,11 +1,6 @@
 import * as React from "react";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { Link } from "react-router-dom";
-import { Avatar, Box } from "@mui/material";
-import { styled } from "@mui/material/styles";
+import { Avatar, Box, Checkbox } from "@mui/material";
 import {
     deepOrange,
     deepPurple,
@@ -14,15 +9,15 @@ import {
     amber,
     blue,
     grey,
+    red,
 } from "@mui/material/colors";
+import { useState, useEffect } from "react";
+import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
+import Favorite from "@mui/icons-material/Favorite";
+import { useDispatch, useSelector } from "react-redux";
+import { likeComment, unlikeComment } from "../commentLikes/likesSlice";
 
-const CardContentNoPadding = styled(CardContent)(`
-  &:last-child {
-    padding-bottom: 0;
-  }
-`);
-
-const colorArry = [
+const colorArray = [
     deepOrange[500],
     deepPurple[500],
     pink[500],
@@ -30,57 +25,33 @@ const colorArry = [
     amber[500],
     blue[500],
     grey[500],
+    red["A400"],
 ];
 
-export default function CommentCard({ name, body, email }) {
-    let randomColor = colorArry[Math.ceil(Math.random() * colorArry.length)];
+export default function CommentCard({ name, body, email, postId, commentId }) {
+    const [randomColor, setRandomColor] = useState(
+        colorArray[Math.floor(Math.random() * colorArray.length)]
+    );
 
-    // return (
-    //     <Card
-    //         sx={{
-    //             display: "flex",
-    //             flexDirection: "row",
-    //             height: "100%",
-    //             alignItems: "center",
-    //             // margin: 1,
-    //             boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
-    //             transition: "0.3s",
-    //             "&:hover": {
-    //                 boxShadow: "0 8px 16px rgba(0, 0, 0, 0.4)",
-    //             },
-    //         }}
-    //     >
-    //         <CardContentNoPadding sx={{ pb: 1 }}>
-    //             <Typography
-    //                 variant="body2"
-    //                 sx={{
-    //                     color: "inherit",
-    //                     fontWeight: "400",
-    //                     fontSize: "16px",
-    //                     my: 1,
-    //                 }}
-    //             >
-    //                 {body}
-    //             </Typography>
-    //             <Box
-    //                 sx={{
-    //                     display: "flex",
-    //                     flexDirection: "row",
-    //                     alignItems: "center",
-    //                     justifyContent: "flex-start",
-    //                     mt: 1,
-    //                 }}
-    //             >
-    //                 <Avatar
-    //                     src="/broken-image.jpg"
-    //                     sx={{ width: 24, height: 24, my: 1 }}
-    //                 />
-    //                 {/* <Typography>{name}</Typography> */}
-    //                 <Typography sx={{ mx: 1 }}>{email}</Typography>
-    //             </Box>
-    //         </CardContentNoPadding>
-    //     </Card>
-    // );
+    const dispatch = useDispatch();
+    const isLiked = useSelector(
+        (state) => state.likes[`${postId}_${commentId}`]
+    );
+
+    const handleLike = () => {
+        if (isLiked) {
+            dispatch(unlikeComment({ postId, commentId }));
+        } else {
+            dispatch(likeComment({ postId, commentId }));
+        }
+    };
+
+    useEffect(() => {
+        // Update the random color only when the component initially mounts
+        setRandomColor(
+            colorArray[Math.floor(Math.random() * colorArray.length)]
+        );
+    }, []);
 
     return (
         <Box sx={{ mx: 3, mt: 2 }}>
@@ -95,29 +66,55 @@ export default function CommentCard({ name, body, email }) {
             >
                 {body}
             </Typography>
+
             <Box
                 sx={{
                     display: "flex",
                     flexDirection: "row",
                     alignItems: "center",
-                    justifyContent: "flex-start",
-                    mt: 1,
+                    justifyContent: "space-between",
                 }}
             >
-                <Avatar
-                    src="/broken-image.jpg"
+                <Box
                     sx={{
-                        width: 24,
-                        height: 24,
-                        my: 1,
-                        bgcolor: randomColor,
+                        display: "flex",
+                        flexDirection: "row",
+                        alignItems: "center",
+                        justifyContent: "flex-start",
+                        mt: 1,
                     }}
                 >
-                    {email.charAt(0).toUpperCase()}
-                </Avatar>
+                    <Avatar
+                        src="/broken-image.jpg"
+                        sx={{
+                            width: 24,
+                            height: 24,
+                            my: 1,
+                            bgcolor: randomColor,
+                        }}
+                    >
+                        {email.charAt(0).toUpperCase()}
+                    </Avatar>
 
-                {/* <Typography>{name}</Typography> */}
-                <Typography sx={{ mx: 1 }}>{email}</Typography>
+                    {/* <Typography>{name}</Typography> */}
+                    <Typography sx={{ mx: 1 }}>{email}</Typography>
+                </Box>
+
+                <div>
+                    <Checkbox
+                        style={{ color: "red" }}
+                        inputProps={{ "aria-label": "controlled" }}
+                        checked={isLiked}
+                        icon={<FavoriteBorder />}
+                        checkedIcon={<Favorite />}
+                        onChange={handleLike}
+                    />
+                    {/* <Checkbox
+                        inputProps={{ 'aria-label': 'controlled' }}
+                        icon={<BookmarkBorderIcon />}
+                        checkedIcon={<BookmarkIcon />}
+                    /> */}
+                </div>
             </Box>
         </Box>
     );

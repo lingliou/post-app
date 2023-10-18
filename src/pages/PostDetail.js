@@ -77,6 +77,8 @@ export default function PostDetail() {
                             name={comment.name}
                             body={comment.body}
                             email={comment.email}
+                            postId={postId}
+                            commentId={comment.id}
                         />
                     </React.Fragment>
                 ))}
