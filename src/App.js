@@ -1,10 +1,10 @@
 import * as React from "react";
 import Home from "./pages/Home";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createHashRouter, RouterProvider } from "react-router-dom";
 import NotFound from "./pages/NoFound";
 import PostDetail from "./pages/PostDetail";
 
-const router = createBrowserRouter([
+const router = createHashRouter([
     {
         path: "/",
         element: <Home />,
