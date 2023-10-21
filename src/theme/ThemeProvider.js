@@ -6,12 +6,14 @@ import darkTheme from "./darkTheme";
 
 // Create a context to provide the theme and theme toggling function
 export const ThemeToggleContext = createContext();
+let intervalId;
 
 const ThemeToggleProvider = ({ children }) => {
     const [currentTheme, setCurrentTheme] = useState(lightTheme);
 
     // Function to toggle between light and dark themes
     const toggleTheme = () => {
+        if (intervalId) clearInterval(intervalId);
         setCurrentTheme((prevTheme) =>
             prevTheme === lightTheme ? darkTheme : lightTheme
         );
@@ -33,7 +35,7 @@ const ThemeToggleProvider = ({ children }) => {
         updateTheme();
 
         // Update the theme every minute (adjust the interval as needed)
-        const intervalId = setInterval(updateTheme, 60e3); // 60,000 milliseconds (1 minute)
+        intervalId = setInterval(updateTheme, 60e3); // 60,000 milliseconds (1 minute)
 
         return () => {
             // Clear the interval when the component unmounts
