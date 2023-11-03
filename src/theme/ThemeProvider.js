@@ -8,7 +8,7 @@ import darkTheme from "./darkTheme";
 export const ThemeToggleContext = createContext();
 let intervalId;
 
-const ThemeToggleProvider = ({ children }) => {
+export const ThemeToggleProvider = ({ children }) => {
     const [currentTheme, setCurrentTheme] = useState(lightTheme);
 
     // Function to toggle between light and dark themes
@@ -49,5 +49,3 @@ const ThemeToggleProvider = ({ children }) => {
         </ThemeToggleContext.Provider>
     );
 };
-
-export default ThemeToggleProvider;
